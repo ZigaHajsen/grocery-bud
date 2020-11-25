@@ -1,15 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { List, Alert } from '../';
 
+interface AppListState {
+  id: string;
+  title: string;
+}
+
 const App: React.FC = () => {
   const [name, setName] = useState('');
-  const [list, setList] = useState([]);
+  const [list, setList] = useState<AppListState[]>([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditId] = useState(null);
   const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!name) {
+      //display alert
+    } else if (name && isEditing) {
+      //deal with edit
+    } else {
+      //show alert
+      const newItem = { id: new Date().getTime().toString(), title: name };
+      setList([...list, newItem]);
+      setName('');
+    }
   };
 
   return (
