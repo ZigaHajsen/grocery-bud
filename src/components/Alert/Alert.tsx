@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const Alert: React.FC<any> = ({ msg, type, removeAlert }) => {
+const Alert: React.FC<any> = ({ msg, type, removeAlert, list }) => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       removeAlert();
@@ -8,7 +8,7 @@ const Alert: React.FC<any> = ({ msg, type, removeAlert }) => {
 
     return () => clearTimeout(timeout);
     // eslint-disable-next-line
-  }, []);
+  }, [list]);
 
   return <p className={`alert alert-${type}`}>{msg}</p>;
 };

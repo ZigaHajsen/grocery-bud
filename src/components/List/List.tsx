@@ -4,9 +4,10 @@ import { ListModel } from '../../models/models';
 
 interface ListProps {
   items: ListModel[];
+  removeItem: Function;
 }
 
-const List: React.FC<ListProps> = ({ items }) => {
+const List: React.FC<ListProps> = ({ items, removeItem }) => {
   return (
     <div className='grocery-list'>
       {items.map((item) => {
@@ -19,7 +20,11 @@ const List: React.FC<ListProps> = ({ items }) => {
               <button className='edit-btn' type='button'>
                 <FaEdit />
               </button>
-              <button className='delete-btn' type='button'>
+              <button
+                className='delete-btn'
+                type='button'
+                onClick={() => removeItem(id)}
+              >
                 <FaTrash />
               </button>
             </div>
