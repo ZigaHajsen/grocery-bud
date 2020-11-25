@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { List, Alert } from '../';
-
-interface AppListState {
-  id: string;
-  title: string;
-}
+import { ListModel } from '../../models/models';
 
 const App: React.FC = () => {
   const [name, setName] = useState('');
-  const [list, setList] = useState<AppListState[]>([]);
+  const [list, setList] = useState<ListModel[]>([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditId] = useState(null);
   const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
@@ -46,10 +42,12 @@ const App: React.FC = () => {
           </button>
         </div>
       </form>
-      <div className='grocery-container'>
-        <List />
-        <button className='clear-btn'>clear items</button>
-      </div>
+      {list.length > 0 && (
+        <div className='grocery-container'>
+          <List items={list} />
+          <button className='clear-btn'>clear items</button>
+        </div>
+      )}
     </section>
   );
 };
