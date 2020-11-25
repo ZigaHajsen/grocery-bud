@@ -2,9 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { List, Alert } from '../';
 import { ListModel, AlertModel } from '../../models/models';
 
+const getLocalStorage = () => {
+  let list = localStorage.getItem('list');
+
+  if (list) {
+    return JSON.parse(localStorage.getItem('list')!);
+  } else {
+    return [];
+  }
+};
+
 const App: React.FC = () => {
   const [name, setName] = useState('');
-  const [list, setList] = useState<ListModel[]>([]);
+  const [list, setList] = useState<ListModel[]>(getLocalStorage());
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditId] = useState<null | string>(null);
   const [alert, setAlert] = useState<AlertModel>({
@@ -56,6 +66,10 @@ const App: React.FC = () => {
     setEditId(id);
     setName(specificItem!.title);
   };
+
+  useEffect(() => {
+    localStorage.setItem('list', JSON.stringify(list));
+  }, [list]);
 
   return (
     <section className='section-center'>
