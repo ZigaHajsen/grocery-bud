@@ -1,6 +1,15 @@
 import React, { useEffect } from 'react';
+import { ListModel, AlertModel } from '../../models/models';
 
-const Alert: React.FC<any> = ({ msg, type, removeAlert, list }) => {
+interface AlertProps {
+  alert: AlertModel;
+  removeAlert: Function;
+  list: ListModel[];
+}
+
+const Alert: React.FC<AlertProps> = ({ alert, removeAlert, list }) => {
+  const { msg, type } = alert;
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       removeAlert();
